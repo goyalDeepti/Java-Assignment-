@@ -1,5 +1,6 @@
 package com.example.demo.Service;
 
+import com.example.demo.IService.IRewardService;
 import com.example.demo.Model.Transaction;
 import com.example.demo.Repository.TransactionRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -14,12 +15,14 @@ import java.util.List;
 import java.util.Map;
 
 @Slf4j
-public class RewardServiceImpl {
+@Service
+public class RewardServiceImpl implements IRewardService {
 
     private static final Logger log = LoggerFactory.getLogger(RewardServiceImpl.class);
     @Autowired
     TransactionRepository transactionRepository;
 
+    @Override
     public Map<String,Integer> calculateRewards(Long customerId, String month) {
         Map<String, Integer> rewards = new HashMap<>();
         try {
