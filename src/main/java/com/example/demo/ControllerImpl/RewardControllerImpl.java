@@ -1,6 +1,5 @@
 package com.example.demo.ControllerImpl;
 
-import com.example.demo.IControlller.IRewardController;
 import com.example.demo.IService.IRewardService;
 import com.example.demo.Service.RewardServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
