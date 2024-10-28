@@ -1,10 +1,11 @@
 package com.example.demo.ControllerImpl;
 
+import com.example.demo.IController.IRewardController;
 import com.example.demo.IService.IRewardService;
-import com.example.demo.Service.RewardServiceImpl;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,20 +16,29 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/rewards")
-public class RewardControllerImpl {
+@Slf4j
+public class RewardControllerImpl implements IRewardController {
 
+    private static final Logger log = LoggerFactory.getLogger(RewardControllerImpl.class);
     @Autowired
     IRewardService rewardService;
 
     @GetMapping("/getRewards/{customerId}/{month}")
-    public ResponseEntity<Map<String, Integer>> getRewards(@PathVariable  Long customerId, @PathVariable  String month){
-        Map<String,Integer>response= new HashMap<>();
-        try{
-           response=  rewardService.calculateRewards(customerId,month);
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }catch(Exception e){
-            response.put("An error occurred ",0);
-           return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-       }
+//    public ResponseEntity<Map<String, Integer>> getRewards(@PathVariable Long customerId, @PathVariable String month){
+//        Map<String,Integer>response= new HashMap<>();
+//        try{
+//            log.info("Inside @Class RewardControllerImpl @Method getRewards:{}",customerId);
+//           response=  rewardService.calculateRewards(customerId,month);
+//        return new ResponseEntity<>(response, HttpStatus.OK);
+//    }catch(Exception e){
+//            response.put(e.getMessage(),0);
+//           return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+//       }
+//    }
+
+    public Map<String, Integer> getRewards(@PathVariable Long customerId, @PathVariable String month) {
+        Map<String, Integer> response = new HashMap<>();
+            log.info("Inside @Class RewardControllerImpl @Method getRewards:{}", customerId);
+            return rewardService.calculateRewards(customerId, month);
+        }
     }
-}
