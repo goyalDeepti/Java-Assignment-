@@ -1,6 +1,5 @@
 package com.example.demo.ControllerImpl;
 
-import com.example.demo.IController.IRewardController;
 import com.example.demo.IService.IRewardService;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -17,25 +16,13 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/rewards")
 @Slf4j
-public class RewardControllerImpl implements IRewardController {
+public class RewardControllerImpl {
 
     private static final Logger log = LoggerFactory.getLogger(RewardControllerImpl.class);
     @Autowired
     IRewardService rewardService;
 
     @GetMapping("/getRewards/{customerId}/{month}")
-//    public ResponseEntity<Map<String, Integer>> getRewards(@PathVariable Long customerId, @PathVariable String month){
-//        Map<String,Integer>response= new HashMap<>();
-//        try{
-//            log.info("Inside @Class RewardControllerImpl @Method getRewards:{}",customerId);
-//           response=  rewardService.calculateRewards(customerId,month);
-//        return new ResponseEntity<>(response, HttpStatus.OK);
-//    }catch(Exception e){
-//            response.put(e.getMessage(),0);
-//           return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
-//       }
-//    }
-
     public Map<String, Integer> getRewards(@PathVariable Long customerId, @PathVariable String month) {
         Map<String, Integer> response = new HashMap<>();
             log.info("Inside @Class RewardControllerImpl @Method getRewards:{}", customerId);
