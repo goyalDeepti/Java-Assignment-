@@ -1,19 +1,48 @@
-Project Details:
-This project contains an api which is used to calculate rewards for each customer as per month. This project handles the exceptions.
+Overview
 
-API Documentation:
-http://localhost:8080/api/rewards/getRewards/{customerId}/{month}
+This application is a rewards points system that allows retailers to calculate reward points for their customers based on their purchases. Customers earn points based on transaction amounts with specific condition.
 
-Endpoints:
-GET/endpoint
-This endpoint is used to access the API which calculates rewards.
+Features
 
-Parameters:
-It is a mandatory parameter to calculate rewards for each customer.
-@PathVariable customerId 
-@PathVariable month 
+Calculate Monthly Rewards: Retrieve total reward points earned by a customer for each month.
+Calculate Rewards with multiple months: Retrieve total reward points earned .
+RESTful API: Expose endpoints for accessing rewards information.
 
-Response:
-{
-"key":"value"
-}
+
+Tech Stack
+
+Technology: Java 21
+Backend: Spring Boot
+Database: H2 DB
+Testing: JUnit, Mockito
+Build Tool: Maven
+
+Requirements
+
+Java 8 or higher
+Maven
+H2 DB
+
+Installation
+
+Clone the repository:
+
+1. git clone https://github.com/goyalDeepti/Java-Assignment-.git
+cd Java-Assignment-project
+
+2. Build the project:
+ mvn clean install
+3. Run the application: mvn spring-boot-run
+
+Endpoints
+
+Get Monthly points example : http://localhost:8081/api/rewards/getRewards/1/May
+Get data from multiple points example : http://localhost:8081/api/rewards/getRewardsForMultipleMonths
+
+Sample Data
+
+This application includes sample data for demonstration purposes. You can find sample data in 'sample.json' file.
+
+Author
+
+Deepti Goyal
