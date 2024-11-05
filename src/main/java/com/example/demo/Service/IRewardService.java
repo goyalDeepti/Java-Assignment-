@@ -2,6 +2,8 @@ package com.example.demo.Service;
 
 
 import com.example.demo.DTO.RewardsDTO;
+import com.example.demo.Wrapper.MonthsWrapper;
+import com.example.demo.Wrapper.ResponseWrapper;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
@@ -15,12 +17,12 @@ public interface IRewardService {
      * @param month
      * @return
      */
-    public RewardsDTO calculateRewards(Long customerId, String month);
+    public RewardsDTO calculateRewards(Long customerId, String month, int year);
 
     /**
      * getRewardsBasedOnMultipleMonths() will calculate total reward points for given List of months.
      * @param months
      * @return
      */
-    public RewardsDTO getRewardsBasedOnMultipleMonths( List<String>months);
+    public ResponseWrapper getRewardsBasedOnMultipleMonths(MonthsWrapper months);
     }

@@ -31,10 +31,11 @@ public class RewardServiceTest {
     @Test
     public void testCalculateRewardsWithNoTransactions(){
         Long customerId = 1L;
-        String month = "2023-10";
+        String month = "May";
+        int year=2024;
         List<Transaction>transactions = Collections.emptyList();
         when(transactionRepository.findByCustomerIdAndDateBetween(any(),any(),any())).thenReturn((transactions));
-        RewardsDTO result = rewardService.calculateRewards(customerId,month);
+        RewardsDTO result = rewardService.calculateRewards(customerId,month,year);
         assertEquals(0, result.rewards);
     }
     /**
@@ -49,7 +50,7 @@ public class RewardServiceTest {
                 new Transaction(1L,150.0,start)
         );
         when(transactionRepository.findByCustomerIdAndDateBetween(customerId,start,end)).thenReturn((transactions));
-        RewardsDTO result = rewardService.calculateRewards(customerId,"2023-10");
+        RewardsDTO result = rewardService.calculateRewards(customerId,"2023-10",2024);
         assertEquals(100, result.rewards);
         assertEquals(150, result.rewards);
     }
@@ -66,7 +67,7 @@ public class RewardServiceTest {
                 new Transaction(1L,150.0,start)
         );
         when(transactionRepository.findByCustomerIdAndDateBetween(customerId,start,end)).thenReturn((transactions));
-        RewardsDTO result = rewardService.calculateRewards(customerId,"2023-10");
+        RewardsDTO result = rewardService.calculateRewards(customerId,"2023-10",2024);
         assertEquals(25, result.rewards);
         assertEquals(75, result.rewards);
     }
@@ -84,7 +85,7 @@ public class RewardServiceTest {
                 new Transaction(3L,120.0,start)
         );
         when(transactionRepository.findByCustomerIdAndDateBetween(customerId,start,end)).thenReturn((transactions));
-        RewardsDTO result = rewardService.calculateRewards(customerId,"2023-10");
+        RewardsDTO result = rewardService.calculateRewards(customerId,"2023-10",2024);
         assertEquals(140, result.rewards);
         assertEquals(345, result.rewards);
     }

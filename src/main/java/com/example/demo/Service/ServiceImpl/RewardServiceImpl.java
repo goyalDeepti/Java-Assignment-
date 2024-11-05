@@ -8,6 +8,8 @@ import com.example.demo.Model.Transaction;
 import com.example.demo.Repository.ICustomerRepository;
 import com.example.demo.Repository.ITransactionRepository;
 import com.example.demo.Service.IRewardService;
+import com.example.demo.Wrapper.MonthsWrapper;
+import com.example.demo.Wrapper.ResponseWrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,18 +35,14 @@ public class RewardServiceImpl implements IRewardService {
         ICustomerRepository customerRepository;
 
         @Override
-        public RewardsDTO calculateRewards(Long customerId, String month) {
+        public RewardsDTO calculateRewards(Long customerId, String month, int year) {
             log.info("Inside calculateRewards method for customerId:{}, month:{}", customerId, month);
             customerRepository.findById(customerId).orElseThrow(()-> new CustomerNotFoundException("NO CUSTOMER PRESENT WITH ID = " + customerId));
                 if (!checkMonthIsValid(month))
                     throw new InvalidMonthException("Month should be between Jan to Dec, please check");
                     //Define the start and end dates for the month
-            DateTimeFormatter parser = DateTimeFormatter.ofPattern("MMM")
-                    .withLocale(Locale.ENGLISH);
-                    TemporalAccessor accessor = parser.parse(month);
-                    int monthNumber = accessor.get(ChronoField.MONTH_OF_YEAR);
-                    LocalDate startDate = LocalDate.parse(monthNumber + "-01");
-                    LocalDate endDate = LocalDate.parse(monthNumber + "-31");
+            LocalDate startDate = LocalDate.of(year, 1, 1);
+            LocalDate endDate = LocalDate.of(year, 12, 31);
             List<Transaction>transactions = transactionRepository.findByCustomerIdAndDateBetween(customerId, startDate, endDate);
                     log.info("Count of data record of transactions: {}", transactions.size());
             int totalPoints = 0;
@@ -71,19 +69,17 @@ public class RewardServiceImpl implements IRewardService {
         }
 
         @Override
-        public RewardsDTO getRewardsBasedOnMultipleMonths(List<String>months){
-            RewardsDTO rewardsDTO = new RewardsDTO();
+        public ResponseWrapper getRewardsBasedOnMultipleMonths(MonthsWrapper months){
+            ResponseWrapper responseWrapper = new ResponseWrapper();
             List<String> monthList = new ArrayList<>();
-            for(String month : months){
+            List<String> monthsData = months.months;
+            for(String month : monthsData){
+                log.info("initial data of month: {}",month);
                 if (!checkMonthIsValid(month))
                     throw new InvalidMonthException("Month should be between Jan to Dec, please check");
                 //Define the start and end dates for the month
-                DateTimeFormatter parser = DateTimeFormatter.ofPattern("MMM")
-                        .withLocale(Locale.ENGLISH);
-                TemporalAccessor accessor = parser.parse(month);
-                int monthNumber = accessor.get(ChronoField.MONTH_OF_YEAR);
-                LocalDate startDate = LocalDate.parse(monthNumber + "-01");
-                LocalDate endDate = LocalDate.parse(monthNumber + "-31");
+                LocalDate startDate = LocalDate.of(months.year, 1, 1);
+                LocalDate endDate = LocalDate.of(months.year, 12, 31);
                 List<Transaction>transactions = transactionRepository.findAllByMonthsAndDateBetween(month,startDate, endDate);
                 log.info("Count of data record of transactions in getRewardsBasedOnMultipleMonths: {}", transactions.size());
                 int totalPoints = 0;
@@ -94,12 +90,16 @@ public class RewardServiceImpl implements IRewardService {
                     } else {
                         totalPoints += (int) (amount - 50); // 1 point for each dollar between $50 to $100
                     }
+                    log.info("month data inside for loop: {}", month);
                     monthList.add(month);
+                    log.info("month List inside for loop: {}", monthList);
                 }
-                rewardsDTO.rewards = totalPoints;
-                rewardsDTO.months = monthList;
+//                rewardsDTO.rewards = totalPoints;
+//                rewardsDTO.months = monthList;
+                responseWrapper.rewards = totalPoints;
+                responseWrapper.months = monthList;
             }
-            return rewardsDTO;
+            return responseWrapper;
         }
 
     }
