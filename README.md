@@ -36,12 +36,42 @@ cd Java-Assignment-project
 
 Endpoints
 
-Get Monthly points example : http://localhost:8081/api/rewards/getRewards/1/May
-Get data from multiple points example : http://localhost:8081/api/rewards/getRewardsForMultipleMonths
+Get Monthly points example : http://localhost:8081/api/rewards/getRewards/1/May/2024
+Get data from multiple months example : http://localhost:8081/api/rewards/getRewardsForMultipleMonths
 
-Sample Data
+Sample Data output:
 
-This application includes sample data for demonstration purposes. You can find sample data in 'sample.json' file.
+This application includes sample data for demonstration purposes.
+1. Get Monthly points example: 
+input: api/rewards/getRewards/1/May/2024
+output:
+{
+    "months": [
+        "May"
+    ],
+    "rewards": 90,
+    "custId": 1
+}
+
+2. Get data from multiple months example: 
+input: {
+    "months":["May","June"],
+    "year": 2024
+}
+output:
+{
+    "months": [
+        "May",
+        "June"
+    ],
+    "rewards": 70
+}
+
+
+ 
+
+
+
 
 Author
 
