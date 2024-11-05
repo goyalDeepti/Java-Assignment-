@@ -20,12 +20,23 @@ public class RewardControllerImpl {
     @Autowired
     IRewardService rewardService;
 
+    /**
+     * calculateRewards() will calculate reward points for each customer as per month.
+     * @param customerId
+     * @param month
+     * @return
+     */
     @GetMapping("/getRewards/{customerId}/{month}")
     public ResponseEntity<RewardsDTO> getRewards(@PathVariable Long customerId, @PathVariable String month) {
             log.info("Inside @Class RewardControllerImpl @Method getRewards customerId:{} month:{}", customerId, month);
             return ResponseEntity.ok(rewardService.calculateRewards(customerId, month));
         }
 
+    /**
+     * getRewardsBasedOnMultipleMonths() will calculate total reward points for given List of months.
+     * @param months
+     * @return
+     */
     @GetMapping("/getRewardsForMultipleMonths")
     public ResponseEntity<RewardsDTO> getRewardsBasedOnMultipleMonths(@RequestBody List<String>months){
         log.info("Inside @Class RewardControllerImpl @Method getRewards size of monthList:{}", months);

@@ -25,20 +25,9 @@ public class RewardServiceTest {
     @Mock
     private ITransactionRepository transactionRepository;
 
-    @Test
-    public void testCalculateRewards(){
-        Long customerId = 1L;
-        LocalDate start = LocalDate.of(2023,10,1);
-        LocalDate end = LocalDate.of(2023,10,31);
-        List<Transaction>transactions  = Arrays.asList(
-                new Transaction(1L,150.0,start),
-                new Transaction(2L, 75.0, start)
-        );
-        when(transactionRepository.findByCustomerIdAndDateBetween(customerId,start,end)).thenReturn((transactions));
-        RewardsDTO result = rewardService.calculateRewards(customerId,"2023-10");
-        assertEquals(200, result.rewards);
-    }
-
+    /**
+     * testCalculateRewards() will check with No Transactions
+     */
     @Test
     public void testCalculateRewardsWithNoTransactions(){
         Long customerId = 1L;
@@ -48,7 +37,9 @@ public class RewardServiceTest {
         RewardsDTO result = rewardService.calculateRewards(customerId,month);
         assertEquals(0, result.rewards);
     }
-
+    /**
+     * testCalculateRewards() will check with single Transaction
+     */
     @Test
     public void testCalculateRewardsWithSingleTransactionAbove100(){
         Long customerId = 1L;
@@ -63,6 +54,10 @@ public class RewardServiceTest {
         assertEquals(150, result.rewards);
     }
 
+    /**
+     * testCalculateRewards() will check with single Transaction between 50 and 100
+     */
+
     @Test public void testCalculateRewardsWithSingleTransactionBetween50And100(){
         Long customerId = 1L;
         LocalDate start = LocalDate.of(2023,10,1);
@@ -76,6 +71,9 @@ public class RewardServiceTest {
         assertEquals(75, result.rewards);
     }
 
+    /**
+     * testCalculateRewards() will check with multiple Transactions
+     */
     @Test public void testCalculateRewardsWithMultipleTransaction(){
         Long customerId = 1L;
         LocalDate start = LocalDate.of(2023,10,1);
