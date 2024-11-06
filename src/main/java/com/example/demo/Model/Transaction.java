@@ -20,10 +20,16 @@ public class Transaction {
     private double amount;
     private LocalDate date;
     private String months;
+    private Long custId;
 
-    @ManyToOne
-    @JoinColumn(name = "customer_id")
-    public Customer customer;
+//    @ManyToOne
+//    @JoinColumn(name = "customer_id")
+//    public Customer customer;
+
+public Long getCustId() {
+    return custId;
+}
+
 
     public Transaction(long l, double v, LocalDate start) {
     }

@@ -5,7 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Setter
 @Getter
@@ -13,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 public class RewardsDTO {
 
-    public List<String> months;
-    public Integer rewards;
+    public Map<String,Integer> monthsWithRewards=new HashMap<>();
+//    public Integer rewards;
     public Long custId;
 }

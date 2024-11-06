@@ -36,7 +36,7 @@ public class RewardServiceTest {
         List<Transaction>transactions = Collections.emptyList();
         when(transactionRepository.findByCustomerIdAndDateBetween(any(),any(),any())).thenReturn((transactions));
         RewardsDTO result = rewardService.calculateRewards(customerId,month,year);
-        assertEquals(0, result.rewards);
+        assertEquals(0, result.monthsWithRewards.get("Reward"));
     }
     /**
      * testCalculateRewards() will check with single Transaction
@@ -51,8 +51,8 @@ public class RewardServiceTest {
         );
         when(transactionRepository.findByCustomerIdAndDateBetween(customerId,start,end)).thenReturn((transactions));
         RewardsDTO result = rewardService.calculateRewards(customerId,"2023-10",2024);
-        assertEquals(100, result.rewards);
-        assertEquals(150, result.rewards);
+        assertEquals(100, result.monthsWithRewards.get("Reward"));
+        assertEquals(150, result.monthsWithRewards.get("Reward"));
     }
 
     /**
@@ -68,8 +68,8 @@ public class RewardServiceTest {
         );
         when(transactionRepository.findByCustomerIdAndDateBetween(customerId,start,end)).thenReturn((transactions));
         RewardsDTO result = rewardService.calculateRewards(customerId,"2023-10",2024);
-        assertEquals(25, result.rewards);
-        assertEquals(75, result.rewards);
+        assertEquals(25, result.monthsWithRewards.get("Reward"));
+        assertEquals(75, result.monthsWithRewards.get("Reward"));
     }
 
     /**
@@ -86,8 +86,8 @@ public class RewardServiceTest {
         );
         when(transactionRepository.findByCustomerIdAndDateBetween(customerId,start,end)).thenReturn((transactions));
         RewardsDTO result = rewardService.calculateRewards(customerId,"2023-10",2024);
-        assertEquals(140, result.rewards);
-        assertEquals(345, result.rewards);
+        assertEquals(140, result.monthsWithRewards.get("Reward"));
+        assertEquals(345, result.monthsWithRewards.get("Reward"));
     }
 
 
