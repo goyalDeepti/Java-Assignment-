@@ -77,11 +77,27 @@ This application is a rewards points system that allows retailers to calculate r
 
 ```json
     {
-    "rewards": {
-        "1": 90,
-        "2": 50
-    },
-    "totalRewardsPoints": 140
+    "transactionList": [
+        [
+            {
+                "transactionId": 1,
+                "amount": 120.0,
+                "transactionDate": "2024-01-01",
+                "months": "May",
+                "customerId": 101
+            }
+        ],
+        [
+            {
+                "transactionId": 2,
+                "amount": 110.0,
+                "transactionDate": "2024-01-01",
+                "months": "June",
+                "customerId": 101
+            }
+        ]
+    ],
+    "totalRewardsPoints": 160
 }
 ```    
 - **Description** :
