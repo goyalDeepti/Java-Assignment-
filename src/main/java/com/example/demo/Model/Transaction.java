@@ -2,9 +2,7 @@ package com.example.demo.Model;
 
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 @Getter
@@ -16,18 +14,14 @@ public class Transaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long transactionId;
     private double amount;
-    private LocalDate date;
+    private LocalDate transactionDate;
     private String months;
-    private Long custId;
+    private Long customerId;
 
-//    @ManyToOne
-//    @JoinColumn(name = "customer_id")
-//    public Customer customer;
-
-public Long getCustId() {
-    return custId;
+public Long getCustomerId() {
+    return customerId;
 }
 
 

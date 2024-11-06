@@ -10,11 +10,11 @@ import java.util.Optional;
 
 @Repository
 public interface ITransactionRepository extends JpaRepository<Transaction,Long> {
-    List<Transaction> findByCustIdAndDateBetween(Long custId, LocalDate startDate, LocalDate endDate);
+    List<Transaction> findByCustomerIdAndTransactionDateBetween(Long customerId, LocalDate startDate, LocalDate endDate);
 
-    List<Transaction> findAllByMonthsAndDateBetween(String month, LocalDate startDate, LocalDate endDate);
+    List<Transaction> findAllByMonthsAndTransactionDateBetween(String month, LocalDate startDate, LocalDate endDate);
 
-    public Optional<Transaction> findByCustId(Long custId);
+    public Optional<Transaction> findByCustomerId(Long customerId);
 
 
 }

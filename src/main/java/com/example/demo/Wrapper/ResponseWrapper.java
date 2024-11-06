@@ -1,15 +1,13 @@
 package com.example.demo.Wrapper;
 
+import com.example.demo.Model.Transaction;
+
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class ResponseWrapper {
 
-//    public List<String>months;
-
-    public Map<Long,Integer> rewards=new HashMap<>();
+    public List<List<Transaction>> transactions=new ArrayList<>();
 
         public int totalRewardsPoints;
 }
