@@ -53,10 +53,9 @@ This application is a rewards points system that allows retailers to calculate r
 
 ```json
     {
-    "months": [
-        "May"
-    ],
-    "rewards": 90,
+    "monthsWithRewards": {
+        "May": 90
+    },
     "custId": 1
 }
 ```    
@@ -78,16 +77,16 @@ This application is a rewards points system that allows retailers to calculate r
 
 ```json
     {
-    "months": [
-        "May",
-        "June"
-    ],
-    "rewards": 70
+    "rewards": {
+        "1": 90,
+        "2": 50
+    },
+    "totalRewardsPoints": 140
 }
 ```    
 - **Description** :
 
-   Above transactions found for two months records only, total Rewards is $70.
+   Above transactions found for two months records only, total Rewards is $140.
 
    Author
 
